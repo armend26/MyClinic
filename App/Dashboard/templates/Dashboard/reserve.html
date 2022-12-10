@@ -1,0 +1,65 @@
+{% extends 'Dashboard/dashboard.html' %} 
+
+{% block title %}Reserve{% endblock title %} 
+
+
+{% block dashboard-content %}
+{% load widget_tweaks %}
+<div class="block p-10 rounded-lg shadow-lg bg-white max-w-sm items-center">
+  {% if form.errors  %} 
+  <div class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-black-700 mb-3" role="alert">
+  {{form.errors}}
+  </div>  
+  {% endif %}
+   {%for message in messages%} 
+   <div class="bg-blue-100 rounded-lg py-5 px-6 mb-4 text-base text-blue-700 mb-3" role="alert">
+    {{message}}
+  </div>
+   {% endfor %} 
+   <form method="POST">
+      {% csrf_token %}
+        <p>Date</p> 
+        {{form.date|add_class:"w-full rounded-lg"}}
+        <p>Time</p>  
+        {{form.timeslot|add_class:"w-full rounded-lg"}}
+        <p>Short note</p>  
+        {{form.note|add_class:"w-full rounded-lg"}}
+      <br> <br> 
+      <!--Submit-->
+      <input type="submit" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg" value="Reserve" />
+       
+      <p class="text-sm font-semibold mt-2 pt-1 mb-0">
+        Check
+      <a
+      href="{% url 'calendarView' %}"
+      class="text-blue-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+      >calendar</a></p> 
+    </form>
+  </div>
+</form> 
+
+<script> 
+  //getting the date tomorrow 
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);  
+  //setting the minimum of calendar to tomorrow 
+  document.getElementsByName("date")[0].setAttribute('min', tomorrow.toISOString().split('T')[0]);
+  //getting date of 31 days from today
+  var onemonth = new Date();
+  onemonth.setDate(onemonth.getDate() + 31); 
+  //setting the maximum of calendar to 31 days from today
+  document.getElementsByName("date")[0].setAttribute('max', onemonth.toISOString().split('T')[0]);   
+  
+  //disabling weekends 
+  const picker = document.getElementById('datepicker');
+  picker.addEventListener('input', function(e){
+  var day = new Date(this.value).getUTCDay();
+  if([6,0].includes(day)){
+    e.preventDefault();
+    this.value = '';
+    alert('Please check another date,we dont work during the weekends.');
+  }
+}); 
+</script> 
+ 
+{% endblock dashboard-content %}

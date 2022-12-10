@@ -1,0 +1,39 @@
+{% extends 'Dashboard/dashboard.html' %}
+
+{% block title %}Profile{% endblock title %} 
+
+{%block dashboard-content%}   
+ 
+{% for data in dataset %}
+<div class="w-64 bg-dark shadow-lg rounded-2xl dark:bg-light-800">
+    <img alt="profil" src="https://i.ibb.co/dLHQd6j/landscape.jpg" class="w-full mb-4 rounded-t-lg h-28"/>
+    <div class="flex flex-col items-center justify-center p-4 -mt-16">
+        <a href="#" class="relative block">
+            <img alt="profil" src="https://i.ibb.co/b64KFFh/profilepic.jpg" class="mx-auto object-cover rounded-full h-16 w-16 "/>
+        </a>
+        <p class="mt-2 text-xl font-medium text-black-800 dark:text-black">
+            {{data.user}}
+        </p> 
+
+        <span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full">User</span>
+        <p class="flex items-center text-xs text-black-400">
+           <strong>Location:</strong>   {{data.location}}
+        </p>
+        <p class="flex items-center text-xs text-black-400">
+            <strong>Bio:</strong>  {{data.bio}}
+        </p>
+        <p class="flex items-center text-xs text-black-400">
+            <strong>Birthdate:</strong> {{data.birth_date}}
+        </p>
+        <p class="flex items-center text-xs text-black-400">
+            <strong>Followed by:</strong>  {{data.doctor}}
+        </p>
+        <div class="flex items-center justify-between w-full gap-4 mt-8">
+            <a href="{% url 'logout' %}" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                logout</a>
+        </div>
+    </div>
+</div>
+<hr/> 
+{% endfor %}
+{% endblock %}

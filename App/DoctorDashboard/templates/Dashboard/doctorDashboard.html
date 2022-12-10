@@ -1,0 +1,125 @@
+{% extends 'base.html' %} 
+
+{% block title %}Doctor Dashboard{% endblock title %}
+
+{% block link %}    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+{% endblock link %}   
+
+{% block style %}
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+    .font-family-karla { font-family: karla; }
+    .bg-sidebar { background: #3d68ff; }
+    .cta-btn { color: #3d68ff; }
+    .upgrade-btn { background: #1947ee; }
+    .upgrade-btn:hover { background: #0038fd; }
+    .active-nav-link { background: #1947ee; }
+    .nav-item:hover { background: #1947ee; }
+    .account-link:hover { background: #3d68ff; }
+</style>
+{% endblock style %}
+{% block content %}
+
+<div class="bg-gray-100 font-family-karla flex">
+<aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
+    <div class="p-6">
+        <p class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Doctor</p>
+        
+    </div>
+    <!--Desktop-->
+    <nav class="text-white text-base font-semibold pt-3">
+        <a href="{% url 'doctorDashboard' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clip-rule="evenodd" />
+              </svg> 
+            Dashboard
+        </a>
+
+        <a href="{% url 'manageView' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                <path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" clip-rule="evenodd" />
+              </svg>
+              
+            Manage
+        </a>
+         
+    </nav>
+    <a href="{% url 'logout' %}" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
+        <i class="fas fa-arrow-circle-up mr-3"></i>
+        logout
+    </a>
+</aside>
+
+<div class="relative w-full flex flex-col h-screen overflow-y-hidden">
+   
+    <!-- Mobile Header & Nav -->
+    <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+        <div class="flex items-center justify-between">
+            <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Doctor</a>
+            <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+                <i x-show="!isOpen" class="fas fa-bars"></i>
+                <i x-show="isOpen" class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Dropdown Nav -->
+        <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+            <a href="{% url 'doctorDashboard' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                    <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clip-rule="evenodd" />
+                  </svg>                  
+                Dashboard
+            </a>
+             
+            <a href="{% url 'logout' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-sign-out-alt mr-3"></i>
+                logout
+            </a>
+         
+        </nav>
+        <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+            <i class="fas fa-plus mr-3"></i> New Report
+        </button> -->
+    </header>
+
+    <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+        <main class="w-full flex-grow p-6">
+            
+            {% block admin-content %} 
+             
+
+             
+            <div class="flex h-screen flex-col items-center justify-center space-y-6 bg-gray-100 px-4 sm:flex-row sm:space-x-6 sm:space-y-0">
+                <div class="w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
+              
+                    <h1 class="mt-2 text-center text-2xl font-bold text-gray-500">{{no}}</h1>
+                  <p class="my-4 text-center text-sm text-gray-500">Total number of appointment's with you</p>             
+                </div>
+
+                <div class="w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl">
+                               
+                    <h1 class="mt-2 text-center text-2xl font-bold text-gray-500">{{no_today}}</h1>
+                   <p class="my-4 text-center text-sm text-gray-500">Total number of appointment's with you today</p>             
+                 </div>
+
+                </div> 
+
+
+            {% endblock admin-content %} 
+
+
+        </main>
+
+        <footer class="w-full bg-white text-right p-4">
+            MyClinic 2022. 
+        </footer>
+    </div>
+    
+</div>
+
+<!-- AlpineJS -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<!-- Font Awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+</div> 
+{% endblock content %}

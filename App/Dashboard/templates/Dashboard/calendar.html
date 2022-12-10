@@ -1,0 +1,23 @@
+{% extends 'Dashboard/dashboard.html' %} 
+
+{% block title %}Calendar{% endblock title %} 
+
+{% block scripts %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% endblock scripts %}
+
+ 
+{% block dashboard-content %}
+<div class="flex flex-wrap block rounded-lg  max-w-sm items-center"> 
+<!-- Trigger/Open the Modal onclick="document.getElementById('id01').style.display='block'" -->
+ 
+{% for date in dates %}
+<div class="py-2 pr-4">
+<button onclick="window.open('{{date}}')" 
+class="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+{{date}}</button> 
+
+</div> 
+{% endfor %}  
+</div> 
+{% endblock dashboard-content %}

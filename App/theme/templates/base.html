@@ -1,0 +1,35 @@
+{% load tailwind_tags %}
+<!doctype html>
+<html lang="en">
+<head>
+  
+
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock title %} | MyClinic</title>
+  {% tailwind_css %} 
+  {% block scripts %}{% endblock scripts %}
+  
+  <style> 
+    {% block style %} 
+    
+    {% endblock style %} 
+  </style> 
+  {% block link %}
+  
+  {% endblock link %}
+  
+</head>
+
+<body>
+   
+   {% block content %}
+   
+   {% endblock content %}
+
+    {% block footer %} 
+    
+    {% endblock footer %} 
+
+    
+</body>
+</html>
