@@ -133,6 +133,8 @@ def calendarDateView(request,date):
 #login's coming from social networks  
 @login_required(login_url='loginView') 
 def complete_social(request): 
+    if Profile.objects.filter(user=request.user).exists():
+        return redirect('complete')
     Profile.objects.create(user=request.user)
     return redirect('complete')
 
