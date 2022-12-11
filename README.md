@@ -19,10 +19,10 @@ will need to upgrade the account from django administration.
 Overview (Dashboard) 
 - User's here can see their profile and basic things about their doctor profile. 
 - Can create appointments. *(They can reserve dates from the date today and after 1 month,they can't select sunday or saturday)
-- Can see avaiability. (Can select avaiabile date,see reserved appointments and convert them to excel)
+- Can see avaiability. (Can select available date,see reserved appointments and convert them to excel)
 
 Overview (Doctor Dashboard) 
-- Can view the total number appointments reserved with him, number of appointments for each day.
+- Can view the total number of appointments reserved with him, number of appointments for each day.
 - Can convert patients list into excel 
 - Can convert upcoming appointments into excel 
 - Can delete appointments 
